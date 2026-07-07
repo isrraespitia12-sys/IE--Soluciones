@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuéntanos tu experiencia | IE Soluciones Eléctricas y Civil</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <img src="img/logo-icono-circular.png" alt="IE Soluciones" class="header__logo-img">
+            <span class="header__brand">IE Soluciones eléctricas y obra civil</span>
+        </div>
+    </header>
+
+    <section class="contacto">
+        <span class="contacto__label">DANOS TU OPINIÓN</span>
+        <h2 class="contacto__titulo">¿Ya trabajamos juntos?</h2>
+        <p class="contacto__nota">Cuéntanos cómo te fue — revisamos cada opinión antes de publicarla.</p>
+
+        <form class="contacto__form" name="resenas" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="resenas">
+            <input type="text" name="nombre" class="cotizar__input" placeholder="Tu nombre" required>
+            <input type="text" name="ciudad" class="cotizar__input" placeholder="Ciudad" required>
+            <select name="calificacion" class="cotizar__input" required>
+                <option value="" disabled selected>Calificación</option>
+                <option value="5 estrellas">5 estrellas</option>
+                <option value="4 estrellas">4 estrellas</option>
+                <option value="3 estrellas">3 estrellas</option>
+                <option value="2 estrellas">2 estrellas</option>
+                <option value="1 estrella">1 estrella</option>
+            </select>
+            <textarea name="comentario" class="cotizar__input" placeholder="Cuéntanos tu experiencia" rows="4" required></textarea>
+            <button type="submit" class="cotizar__boton">Enviar opinión</button>
+        </form>
+    </section>
+</body>
+</html>
