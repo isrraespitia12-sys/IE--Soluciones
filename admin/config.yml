@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  - name: "galeria"
+    label: "Galería de trabajos"
+    folder: "content/galeria"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título de la foto", name: "titulo", widget: "string" }
+      - { label: "Imagen", name: "imagen", widget: "image" }
