@@ -34,3 +34,36 @@ btnCotizar.addEventListener('click', function() {
 
     window.open(url, '_blank');
 });
+async function cargarGaleria() {
+    const contenedor = document.querySelector('.galeria-trabajos__grid');
+
+    try {
+        const respuestaLista = await fetch('https://api.github.com/repos/isrraespitia12-sys/IE--Soluciones/contents/content/galeria');
+        const listaArchivos = await respuestaLista.json();
+
+        if (!Array.isArray(listaArchivos) || listaArchivos.length === 0) {
+            return;
+        }
+
+        const promesasContenido = listaArchivos.map(archivo => fetch(archivo.download_url).then(r => r.json()));
+        const entradas = await Promise.all(promesasContenido);
+
+        contenedor.innerHTML = '';
+
+        entradas.forEach(entrada => {
+            const div = document.createElement('div');
+            div.classList.add('foto-placeholder');
+            div.style.backgroundImage = `url(${entrada.imagen})`;
+            div.style.backgroundSize = 'cover';
+            div.style.backgroundPosition = 'center';
+            div.style.color = 'transparent';
+            div.title = entrada.titulo;
+            contenedor.appendChild(div);
+        });
+
+    } catch (error) {
+        console.error('No se pudo cargar la galería:', error);
+    }
+}
+
+cargarGaleria();
