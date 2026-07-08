@@ -11,6 +11,8 @@ collections:
     folder: "content/galeria"
     create: true
     slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     fields:
       - { label: "Título de la foto", name: "titulo", widget: "string" }
       - { label: "Imagen", name: "imagen", widget: "image" }
