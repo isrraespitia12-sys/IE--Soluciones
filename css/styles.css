@@ -83,6 +83,8 @@ body {
     font-weight: 600;
     font-size: 14px;
     text-align: center;
+    background-size: cover;
+    background-position: center 20%;
 }
 .hero {
     display: flex;
@@ -126,6 +128,7 @@ body {
     }
     .hero__placeholder{
         height: 220px;
+        background-position: 30% 20%;
     }
     .hero__image{
         width: 100%;

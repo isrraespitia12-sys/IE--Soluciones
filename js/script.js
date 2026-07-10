@@ -79,10 +79,7 @@ async function cargarHero() {
 
         const contenedorImagen = document.getElementById('hero-imagen');
         contenedorImagen.style.backgroundImage = `url(${datos.imagen})`;
-        contenedorImagen.style.backgroundSize = 'cover';
-        contenedorImagen.style.backgroundPosition = 'center';
         contenedorImagen.textContent = '';
-
     } catch (error) {
         console.error('No se pudo cargar el Hero (puede que todavía no exista content/hero.json):', error);
     }
