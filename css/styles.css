@@ -125,6 +125,12 @@ body {
     .header__nav{
         display: none;
     }
+    .hero__placeholder{
+        height: 220px;
+    }
+    .hero__image{
+        width: 100%;
+    }
 }
 .sobre-nosotros{
     max-width: 700px;
