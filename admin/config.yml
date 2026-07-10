@@ -16,3 +16,13 @@ collections:
     fields:
       - { label: "Título de la foto", name: "titulo", widget: "string" }
       - { label: "Imagen", name: "imagen", widget: "image" }
+  - name: "configuracion"
+    label: "Configuración del sitio"
+    files:
+      - name: "hero"
+        label: "Sección principal (Hero)"
+        file: "content/hero.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Subtítulo", name: "subtitulo", widget: "string" }
+          - { label: "Imagen de fondo", name: "imagen", widget: "image" }

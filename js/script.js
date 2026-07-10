@@ -67,3 +67,25 @@ async function cargarGaleria() {
 }
 
 cargarGaleria();
+async function cargarHero() {
+    try {
+        const respuesta = await fetch('https://api.github.com/repos/isrraespitia12-sys/IE--Soluciones/contents/content/hero.json');
+        const archivo = await respuesta.json();
+        const contenidoDecodificado = decodeURIComponent(escape(atob(archivo.content)));
+        const datos = JSON.parse(contenidoDecodificado);
+
+        document.getElementById('hero-titulo').textContent = datos.titulo;
+        document.getElementById('hero-subtitulo').textContent = datos.subtitulo;
+
+        const contenedorImagen = document.getElementById('hero-imagen');
+        contenedorImagen.style.backgroundImage = `url(${datos.imagen})`;
+        contenedorImagen.style.backgroundSize = 'cover';
+        contenedorImagen.style.backgroundPosition = 'center';
+        contenedorImagen.textContent = '';
+
+    } catch (error) {
+        console.error('No se pudo cargar el Hero (puede que todavía no exista content/hero.json):', error);
+    }
+}
+
+cargarHero();
