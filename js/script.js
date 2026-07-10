@@ -86,3 +86,18 @@ async function cargarHero() {
 }
 
 cargarHero();
+async function cargarSobreNosotros() {
+    try {
+        const respuesta = await fetch('https://api.github.com/repos/isrraespitia12-sys/IE--Soluciones/contents/content/sobre-nosotros.json');
+        const archivo = await respuesta.json();
+        const contenidoDecodificado = decodeURIComponent(escape(atob(archivo.content)));
+        const datos = JSON.parse(contenidoDecodificado);
+
+        document.getElementById('sobre-nosotros-texto').textContent = datos.texto;
+
+    } catch (error) {
+        console.error('No se pudo cargar Sobre Nosotros (puede que todavía no exista el archivo):', error);
+    }
+}
+
+cargarSobreNosotros();

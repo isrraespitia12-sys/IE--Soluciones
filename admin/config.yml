@@ -26,3 +26,8 @@ collections:
           - { label: "Título", name: "titulo", widget: "string" }
           - { label: "Subtítulo", name: "subtitulo", widget: "string" }
           - { label: "Imagen de fondo", name: "imagen", widget: "image" }
+      - name: "sobre_nosotros"
+        label: "Sección Sobre Nosotros"
+        file: "content/sobre-nosotros.json"
+        fields:
+          - { label: "Texto descriptivo", name: "texto", widget: "text" }
