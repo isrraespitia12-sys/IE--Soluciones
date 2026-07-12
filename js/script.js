@@ -101,3 +101,46 @@ async function cargarSobreNosotros() {
 }
 
 cargarSobreNosotros();
+async function cargarGaleriaNosotros() {
+    const contenedor = document.getElementById('galeria-auto-track');
+
+    try {
+        const respuestaLista = await fetch('https://api.github.com/repos/isrraespitia12-sys/IE--Soluciones/contents/content/galeria-nosotros');
+        const listaArchivos = await respuestaLista.json();
+
+        if (!Array.isArray(listaArchivos) || listaArchivos.length === 0) {
+            return;
+        }
+
+        const promesasContenido = listaArchivos.map(archivo => fetch(archivo.download_url).then(r => r.json()));
+        const entradas = await Promise.all(promesasContenido);
+
+        contenedor.innerHTML = '';
+
+        const entradasDuplicadas = entradas.concat(entradas);
+
+        entradasDuplicadas.forEach(entrada => {
+            const item = document.createElement('div');
+            item.classList.add('galeria-auto__item');
+
+            const foto = document.createElement('div');
+            foto.classList.add('galeria-auto__placeholder');
+            foto.style.backgroundImage = `url(${entrada.imagen})`;
+            foto.style.backgroundSize = 'cover';
+            foto.style.backgroundPosition = 'center';
+
+            const nombre = document.createElement('span');
+            nombre.classList.add('galeria-auto__nombre');
+            nombre.textContent = entrada.nombre;
+
+            item.appendChild(foto);
+            item.appendChild(nombre);
+            contenedor.appendChild(item);
+        });
+
+    } catch (error) {
+        console.error('No se pudo cargar la galería de Sobre Nosotros:', error);
+    }
+}
+
+cargarGaleriaNosotros();

@@ -16,6 +16,16 @@ collections:
     fields:
       - { label: "Título de la foto", name: "titulo", widget: "string" }
       - { label: "Imagen", name: "imagen", widget: "image" }
+  - name: "galeria_nosotros"
+    label: "Galería 'Sobre Nosotros'"
+    folder: "content/galeria-nosotros"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "Nombre", name: "nombre", widget: "string" }
+      - { label: "Imagen", name: "imagen", widget: "image" }
   - name: "configuracion"
     label: "Configuración del sitio"
     files:
