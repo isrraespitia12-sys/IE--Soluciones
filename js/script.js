@@ -144,3 +144,72 @@ async function cargarGaleriaNosotros() {
 }
 
 cargarGaleriaNosotros();
+async function cargarServicios() {
+    const contenedor = document.getElementById('servicios-grid');
+
+    try {
+        const respuestaLista = await fetch('https://api.github.com/repos/isrraespitia12-sys/IE--Soluciones/contents/content/servicios');
+        const listaArchivos = await respuestaLista.json();
+
+        if (!Array.isArray(listaArchivos) || listaArchivos.length === 0) {
+            return;
+        }
+
+        const promesasContenido = listaArchivos.map(archivo => fetch(archivo.download_url).then(r => r.json()));
+        const entradas = await Promise.all(promesasContenido);
+
+        contenedor.innerHTML = '';
+
+        entradas.forEach(entrada => {
+            const card = document.createElement('div');
+            card.classList.add('servicio-card');
+
+            const icono = document.createElement('div');
+            icono.classList.add('servicio-card__icono');
+            icono.textContent = entrada.icono;
+
+            const titulo = document.createElement('h3');
+            titulo.classList.add('servicio-card__titulo');
+            titulo.textContent = entrada.titulo;
+
+            const texto = document.createElement('p');
+            texto.classList.add('servicio-card__texto');
+            texto.textContent = entrada.texto;
+
+            card.appendChild(icono);
+            card.appendChild(titulo);
+            card.appendChild(texto);
+            contenedor.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error('No se pudo cargar Servicios:', error);
+    }
+}
+
+cargarServicios();
+async function cargarElegirnos() {
+    try {
+        const respuesta = await fetch('https://api.github.com/repos/isrraespitia12-sys/IE--Soluciones/contents/content/elegirnos.json');
+        const archivo = await respuesta.json();
+        const contenidoDecodificado = decodeURIComponent(escape(atob(archivo.content)));
+        const datos = JSON.parse(contenidoDecodificado);
+
+        document.getElementById('elegirnos-titulo').textContent = datos.titulo;
+        document.getElementById('elegirnos-texto').textContent = datos.texto;
+
+        const lista = document.getElementById('elegirnos-lista');
+        lista.innerHTML = '';
+
+        datos.checks.forEach(check => {
+            const li = document.createElement('li');
+            li.textContent = check.item;
+            lista.appendChild(li);
+        });
+
+    } catch (error) {
+        console.error('No se pudo cargar Por Qué Elegirnos (puede que todavía no exista el archivo):', error);
+    }
+}
+
+cargarElegirnos();
