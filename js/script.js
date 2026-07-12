@@ -213,3 +213,53 @@ async function cargarElegirnos() {
 }
 
 cargarElegirnos();
+async function cargarResenas() {
+    const contenedor = document.getElementById('resenas-grid');
+
+    try {
+        const respuestaLista = await fetch('https://api.github.com/repos/isrraespitia12-sys/IE--Soluciones/contents/content/resenas');
+        const listaArchivos = await respuestaLista.json();
+
+        if (!Array.isArray(listaArchivos) || listaArchivos.length === 0) {
+            return;
+        }
+
+        const promesasContenido = listaArchivos.map(archivo => fetch(archivo.download_url).then(r => r.json()));
+        const entradas = await Promise.all(promesasContenido);
+
+        contenedor.innerHTML = '';
+
+        entradas.forEach(entrada => {
+            const card = document.createElement('div');
+            card.classList.add('resena-card');
+
+            const numeroEstrellas = parseInt(entrada.calificacion, 10);
+            const estrellas = document.createElement('div');
+            estrellas.classList.add('resena-card__estrellas');
+            estrellas.textContent = '★'.repeat(numeroEstrellas) + '☆'.repeat(5 - numeroEstrellas);
+
+            const comentario = document.createElement('p');
+            comentario.classList.add('resena-card__comentario');
+            comentario.textContent = `"${entrada.comentario}"`;
+
+            const nombre = document.createElement('p');
+            nombre.classList.add('resena-card__nombre');
+            nombre.textContent = entrada.nombre;
+
+            const ciudad = document.createElement('p');
+            ciudad.classList.add('resena-card__ciudad');
+            ciudad.textContent = entrada.ciudad;
+
+            card.appendChild(estrellas);
+            card.appendChild(comentario);
+            card.appendChild(nombre);
+            card.appendChild(ciudad);
+            contenedor.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error('No se pudo cargar Reseñas:', error);
+    }
+}
+
+cargarResenas();

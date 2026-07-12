@@ -37,6 +37,21 @@ collections:
       - { label: "Emoji/Ícono", name: "icono", widget: "string" }
       - { label: "Título", name: "titulo", widget: "string" }
       - { label: "Texto descriptivo", name: "texto", widget: "text" }
+  - name: "resenas"
+    label: "Reseñas de clientes"
+    folder: "content/resenas"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "Nombre del cliente", name: "nombre", widget: "string" }
+      - { label: "Ciudad", name: "ciudad", widget: "string" }
+      - label: "Calificación"
+        name: "calificacion"
+        widget: "select"
+        options: ["1", "2", "3", "4", "5"]
+      - { label: "Comentario", name: "comentario", widget: "text" }
   - name: "configuracion"
     label: "Configuración del sitio"
     files:
